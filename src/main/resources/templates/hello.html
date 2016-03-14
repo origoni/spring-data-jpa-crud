@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+	crossorigin="anonymous" />
+<title>글쓰기</title>
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron">
+			<h2>글쓰기 테스트</h2>
+			<form action="/write" method="post">
+				<textarea name="content" class="form-control" rows="2"
+					autofocus="autofocus" placeholder="내용을 입력합니다."></textarea>
+				<div class="input-group">
+					<input class="form-control" name="name" value=""
+						placeholder="이름을 입력합니다." type="text" /> <span
+						class="input-group-btn"><button class="btn btn-default"
+							type="submit">Write!</button></span>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<section class="container">
+		<article th:each="note : ${noteList}">
+			<header>
+				<div th:text="${note.createdAt}">${note.createdAt}</div>
+				<div th:text="${note.name}">${note.name}</div>
+			</header>
+			<h2 th:text="${note.content}">${note.content}</h2>
+			<footer>
+				<a th:href="@{${note.id}+'/delete/'}" role="button" id="delete"
+					class="btn btn-danger">Delete</a>
+			</footer>
+			<hr />
+		</article>
+	</section>
+
+	<script src="https://code.jquery.com/jquery-2.2.1.min.js"
+		integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+		integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+		crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+		$("#delete").click(function() {
+			if (!confirm("정말로 삭제할까요?")) {
+				return false;
+			}
+		});
+
+		$('form').submit(function(event) {
+			$('form input:text, textarea').each(function() {
+				if (!($.trim($(this).val())).length) {
+					alert("모든 값을 입력해 주세요!");
+					event.preventDefault();
+				}
+			});
+		});
+	</script>
+</body>
+</html>
+
+
