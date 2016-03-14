@@ -9,7 +9,7 @@
 <title>글쓰기</title>
 </head>
 <body>
-	<div class="container">
+	<section class="container">
 		<div class="jumbotron">
 			<h2>글쓰기 테스트</h2>
 			<form action="/write" method="post">
@@ -23,18 +23,16 @@
 				</div>
 			</form>
 		</div>
-	</div>
 
-	<section class="container">
 		<article th:each="note : ${noteList}">
 			<header>
 				<div th:text="${note.createdAt}">${note.createdAt}</div>
 				<div th:text="${note.name}">${note.name}</div>
 			</header>
-			<h2 th:text="${note.content}">${note.content}</h2>
+			<h3 th:text="${note.content}">${note.content}</h3>
 			<footer>
-				<a th:href="@{${note.id}+'/delete/'}" role="button" id="delete"
-					class="btn btn-danger">Delete</a>
+				<a th:href="@{${note.id}+'/delete/'}" role="button"
+					class="btn btn-danger delete-btn">Delete</a>
 			</footer>
 			<hr />
 		</article>
@@ -49,7 +47,7 @@
 		crossorigin="anonymous"></script>
 
 	<script type="text/javascript">
-		$("#delete").click(function() {
+		$(".delete-btn").click(function() {
 			if (!confirm("정말로 삭제할까요?")) {
 				return false;
 			}
