@@ -27,6 +27,9 @@
 		<article th:each="note : ${noteList}">
 			<header>
 				<div th:text="${note.createdAt}">${note.createdAt}</div>
+				<div th:text="${#dates.format(note.createdAt)}">${#dates.format(note.createdAt)}</div>
+				<div th:text="${note.updateAt}">${note.updateAt}</div>
+				<div th:text="${#temporals.format(note.updateAt)}">${#temporals.format(note.updateAt)}</div>
 				<div th:text="${note.name}">${note.name}</div>
 			</header>
 			<h3 th:text="${note.content}">${note.content}</h3>

@@ -1,5 +1,6 @@
 package com.millky.crud;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class CrudController {
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
 	public String write(Note note) {
 		note.setCreatedAt(new Date());
+		note.setUpdateAt(LocalDateTime.now());
 		noteDao.save(note);
 		return "redirect:/";
 	}

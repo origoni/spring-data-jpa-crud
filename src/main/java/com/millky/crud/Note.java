@@ -1,10 +1,13 @@
 package com.millky.crud;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
+//import org.hibernate.annotations.Type;
 
 @Entity
 public class Note {
@@ -16,6 +19,9 @@ public class Note {
 	String name;
 	String content;
 	Date createdAt;
+
+	// @Type(type = "org.hibernate.type.LocalDateTimeType")
+	LocalDateTime updateAt;
 
 	public int getId() {
 		return id;
@@ -49,4 +55,11 @@ public class Note {
 		this.createdAt = createdAt;
 	}
 
+	public LocalDateTime getUpdateAt() {
+		return updateAt;
+	}
+
+	public void setUpdateAt(LocalDateTime updateAt) {
+		this.updateAt = updateAt;
+	}
 }
